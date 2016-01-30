@@ -17,6 +17,7 @@ import org.silnith.game.move.Move;
 import org.silnith.util.LinkedNode;
 import org.silnith.util.Pair;
 
+
 @RunWith(MockitoJUnitRunner.class)
 public class GameStateTest {
     
@@ -49,8 +50,9 @@ public class GameStateTest {
     
     @Test
     public void testGameStateMoveOfTT() {
-        final Pair<LinkedNode<Move<Object>>, LinkedNode<Object>> expected = new Pair<>(new LinkedNode<>(move), new LinkedNode<>(board));
-        
+        final Pair<LinkedNode<Move<Object>>, LinkedNode<Object>> expected =
+                new Pair<>(new LinkedNode<>(move), new LinkedNode<>(board));
+                
         final GameState<Move<Object>, Object> actual = new GameState<>(move, board);
         
         assertEquals(expected, actual);

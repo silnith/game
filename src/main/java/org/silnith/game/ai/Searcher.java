@@ -13,12 +13,12 @@ import org.silnith.game.Game;
 import org.silnith.game.GameState;
 import org.silnith.game.move.Move;
 
+
 /**
  * A game search engine. Given a game engine and an initial game state, this
  * provides functionality to search the game tree.
  *
- * @param <B>
- *            the board type for the game to search
+ * @param <B> the board type for the game to search
  */
 public class Searcher<M extends Move<B>, B> {
     
@@ -42,8 +42,7 @@ public class Searcher<M extends Move<B>, B> {
         this.initialState = initialState;
         this.pendingNodes = new ConcurrentLinkedDeque<>();
         this.pendingNodesCount = new AtomicLong();
-        this.solutions = Collections
-                .synchronizedCollection(new HashSet<GameState<M, B>>());
+        this.solutions = Collections.synchronizedCollection(new HashSet<GameState<M, B>>());
         this.nodesSearched = new AtomicLong();
         this.maxDepthSearched = new AtomicInteger();
         
@@ -82,8 +81,7 @@ public class Searcher<M extends Move<B>, B> {
      * Search the given game state and return a collection of possible game
      * states that can succeed it.
      * 
-     * @param state
-     *            the game state to search
+     * @param state the game state to search
      * @return a collection of game states that can follow the input state
      */
     protected Collection<GameState<M, B>> search(final GameState<M, B> state) {
@@ -91,8 +89,7 @@ public class Searcher<M extends Move<B>, B> {
         
         final Collection<M> possibleMoves = game.findAllMoves(state);
         for (final M possibleMove : possibleMoves) {
-            final GameState<M, B> possibleState = new GameState<>(state,
-                    possibleMove);
+            final GameState<M, B> possibleState = new GameState<>(state, possibleMove);
             
             final GameState<M, B> prunedState = game.pruneGameState(possibleState);
             
@@ -114,7 +111,7 @@ public class Searcher<M extends Move<B>, B> {
                 return;
             }
             succeeded = maxDepthSearched.compareAndSet(current, depth);
-        } while (!succeeded);
+        } while ( !succeeded);
     }
     
     protected void addNodeToQueue(final GameState<M, B> node) {
@@ -151,7 +148,7 @@ public class Searcher<M extends Move<B>, B> {
                         addNodeToQueue(gameState);
                     }
                     pendingNodesCount.decrementAndGet();
-                } while (!isDone());
+                } while ( !isDone());
             } catch (final InterruptedException e) {
                 ;
             }

@@ -23,6 +23,7 @@ import org.silnith.game.Game;
 import org.silnith.game.GameState;
 import org.silnith.game.move.Move;
 
+
 @RunWith(MockitoJUnitRunner.class)
 public class SearcherTest {
     
@@ -83,19 +84,15 @@ public class SearcherTest {
         when(move1.apply(any(Object.class))).thenReturn(board1);
         when(move2.apply(any(Object.class))).thenReturn(board2);
         when(move3.apply(any(Object.class))).thenReturn(board3);
-        when(game.pruneGameState(any(GameState.class))).thenAnswer(
-                new ReturnFirstArgumentAnswer<>());
+        when(game.pruneGameState(any(GameState.class))).thenAnswer(new ReturnFirstArgumentAnswer<>());
         
         final Collection<GameState<Move<Object>, Object>> newStates = searcher.search(initialState);
         
         assertEquals(3, newStates.size());
         
-        final GameState<Move<Object>, Object> state1 = new GameState<Move<Object>, Object>(
-                initialState, move1, board1);
-        final GameState<Move<Object>, Object> state2 = new GameState<Move<Object>, Object>(
-                initialState, move2, board2);
-        final GameState<Move<Object>, Object> state3 = new GameState<Move<Object>, Object>(
-                initialState, move3, board3);
+        final GameState<Move<Object>, Object> state1 = new GameState<Move<Object>, Object>(initialState, move1, board1);
+        final GameState<Move<Object>, Object> state2 = new GameState<Move<Object>, Object>(initialState, move2, board2);
+        final GameState<Move<Object>, Object> state3 = new GameState<Move<Object>, Object>(initialState, move3, board3);
         
         final Iterator<GameState<Move<Object>, Object>> iter = newStates.iterator();
         final GameState<Move<Object>, Object> firstState = iter.next();
@@ -129,12 +126,9 @@ public class SearcherTest {
         
         assertTrue(newStates.isEmpty());
         
-        final GameState<Move<Object>, Object> state1 = new GameState<Move<Object>, Object>(
-                initialState, move1, board1);
-        final GameState<Move<Object>, Object> state2 = new GameState<Move<Object>, Object>(
-                initialState, move2, board2);
-        final GameState<Move<Object>, Object> state3 = new GameState<Move<Object>, Object>(
-                initialState, move3, board3);
+        final GameState<Move<Object>, Object> state1 = new GameState<Move<Object>, Object>(initialState, move1, board1);
+        final GameState<Move<Object>, Object> state2 = new GameState<Move<Object>, Object>(initialState, move2, board2);
+        final GameState<Move<Object>, Object> state3 = new GameState<Move<Object>, Object>(initialState, move3, board3);
         
         verify(move1).apply(same(initialBoard));
         verify(move2).apply(same(initialBoard));

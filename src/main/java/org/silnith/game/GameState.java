@@ -6,29 +6,25 @@ import org.silnith.game.move.Move;
 import org.silnith.util.LinkedNode;
 import org.silnith.util.Pair;
 
+
 /**
  * A single node in a game tree. This keeps track of the history of a game, both
  * the sequence of moves made from the beginning and the state of the board
  * after every move.
- *
  * <p>
  * It is assumed that {@code node.getMoves().size() == node.getBoards().size()}.
  *
- * @param <B>
- *            the type of the game board
+ * @param <B> the type of the game board
  * @author <a href="mailto:silnith@gmail.com">Kent Rosenkoetter</a>
  */
-public class GameState<M extends Move<B>, B> extends
-        Pair<LinkedNode<M>, LinkedNode<B>> {
+public class GameState<M extends Move<B>, B> extends Pair<LinkedNode<M>, LinkedNode<B>> {
     
     /**
      * Constructs a new game state with the given list of moves and associated
      * board states.
      *
-     * @param moves
-     *            the list of moves
-     * @param boards
-     *            the list of boards
+     * @param moves the list of moves
+     * @param boards the list of boards
      */
     @ConstructorProperties({ "moves", "boards" })
     public GameState(final LinkedNode<M> moves, final LinkedNode<B> boards) {
@@ -38,10 +34,8 @@ public class GameState<M extends Move<B>, B> extends
     /**
      * Constructs an initial game state with the given initial move and board.
      *
-     * @param initialMove
-     *            the initial move. This is often a form of "deal deck".
-     * @param initialBoard
-     *            the initial board
+     * @param initialMove the initial move. This is often a form of "deal deck".
+     * @param initialBoard the initial board
      */
     public GameState(final M initialMove, final B initialBoard) {
         this(new LinkedNode<>(initialMove), new LinkedNode<>(initialBoard));
@@ -51,26 +45,20 @@ public class GameState<M extends Move<B>, B> extends
      * Constructs a new game state by appending the given move and board to the
      * previous game state represented by <var>parent</var>.
      *
-     * @param parent
-     *            the previous game state
-     * @param move
-     *            the new move to append
-     * @param board
-     *            the new board to append
+     * @param parent the previous game state
+     * @param move the new move to append
+     * @param board the new board to append
      */
     public GameState(final GameState<M, B> parent, final M move, final B board) {
-        this(new LinkedNode<>(move, parent.getMoves()), new LinkedNode<>(board,
-                parent.getBoards()));
+        this(new LinkedNode<>(move, parent.getMoves()), new LinkedNode<>(board, parent.getBoards()));
     }
     
     /**
      * Constructs a new game state by applying the given move to the most recent
      * board in the given <var>parent</var> game state.
      *
-     * @param parent
-     *            the previous game state
-     * @param move
-     *            the new move to apply to the game state
+     * @param parent the previous game state
+     * @param move the new move to apply to the game state
      */
     public GameState(final GameState<M, B> parent, final M move) {
         this(parent, move, move.apply(parent.getBoards().get(0)));

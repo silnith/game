@@ -8,6 +8,7 @@ import org.silnith.game.Game;
 import org.silnith.game.GameState;
 import org.silnith.game.move.Move;
 
+
 public class SampleSearcherTest {
     
     private static class Board {
@@ -16,8 +17,8 @@ public class SampleSearcherTest {
         
         public Board mark(final int x, final int y) {
             final Board newBoard = new Board();
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
+            for (int i = 0; i < 3; i++ ) {
+                for (int j = 0; j < 3; j++ ) {
                     newBoard.board[i][j] = board[i][j];
                 }
             }
@@ -59,34 +60,29 @@ public class SampleSearcherTest {
         
         @Override
         public boolean isWin(final Board board) {
-            for (int i = 0; i < 3; i++) {
-                if (board.board[i][0] == 1 && board.board[i][1] == 1
-                        && board.board[i][2] == 1) {
+            for (int i = 0; i < 3; i++ ) {
+                if (board.board[i][0] == 1 && board.board[i][1] == 1 && board.board[i][2] == 1) {
                     return true;
                 }
-                if (board.board[0][i] == 1 && board.board[1][i] == 1
-                        && board.board[2][i] == 1) {
+                if (board.board[0][i] == 1 && board.board[1][i] == 1 && board.board[2][i] == 1) {
                     return true;
                 }
             }
-            if (board.board[0][0] == 1 && board.board[1][1] == 1
-                    && board.board[2][2] == 1) {
+            if (board.board[0][0] == 1 && board.board[1][1] == 1 && board.board[2][2] == 1) {
                 return true;
             }
-            if (board.board[0][2] == 1 && board.board[1][1] == 1
-                    && board.board[2][0] == 1) {
+            if (board.board[0][2] == 1 && board.board[1][1] == 1 && board.board[2][0] == 1) {
                 return true;
             }
             return false;
         }
         
         @Override
-        public Collection<Move<Board>> findAllMoves(
-                final GameState<Move<Board>, Board> state) {
+        public Collection<Move<Board>> findAllMoves(final GameState<Move<Board>, Board> state) {
             final ArrayList<Move<Board>> moves = new ArrayList<>();
             final Board board = state.getBoards().get(0);
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
+            for (int i = 0; i < 3; i++ ) {
+                for (int j = 0; j < 3; j++ ) {
                     if (board.board[i][j] == 0) {
                         moves.add(new XMove(board, i, j));
                     }
@@ -96,20 +92,18 @@ public class SampleSearcherTest {
         }
         
         @Override
-        public GameState<Move<Board>, Board> pruneGameState(
-                final GameState<Move<Board>, Board> state) {
+        public GameState<Move<Board>, Board> pruneGameState(final GameState<Move<Board>, Board> state) {
             return state;
         }
         
     }
     
-    public static void main(final String[] args) throws InterruptedException,
-            ExecutionException {
+    public static void main(final String[] args) throws InterruptedException, ExecutionException {
         final Move<Board> initialMove = new DealMove();
         final Board initialBoard = initialMove.apply(null);
-        final Searcher<Move<Board>, Board> searcher = new Searcher<>(
-                new TicTacToe(), new GameState<>(initialMove, initialBoard));
-        
+        final Searcher<Move<Board>, Board> searcher =
+                new Searcher<>(new TicTacToe(), new GameState<>(initialMove, initialBoard));
+                
         final Runnable worker = searcher.getNewWorker();
         worker.run();
         
@@ -132,8 +126,7 @@ public class SampleSearcherTest {
 //        service.shutdown();
         
         System.out.println("Nodes searched: " + searcher.getNodesSearched());
-        System.out.println("Max depth searched: "
-                + searcher.getMaxDepthSearched());
+        System.out.println("Max depth searched: " + searcher.getMaxDepthSearched());
         System.out.println(searcher.getSolutions().size());
     }
     
