@@ -109,11 +109,9 @@ public class SampleSearcherTest {
         
 //        ExecutorService service = Executors.newFixedThreadPool(4);
 //        final Deque<Future<Collection<GameState<Board>>>> futures = new ConcurrentLinkedDeque<>();
-//        futures.add(service.submit(searcher.getCallable(searcher
-//                .getInitialState())));
+//        futures.add(service.submit(searcher.getCallable(searcher.getInitialState())));
 //        while (!futures.isEmpty()) {
-//            final Future<Collection<GameState<Board>>> removeLast = futures
-//                    .removeLast();
+//            final Future<Collection<GameState<Board>>> removeLast = futures.removeLast();
 //            final Collection<GameState<Board>> collection = removeLast.get();
 //            for (final GameState<Board> state : collection) {
 //                if (searcher.getGame().isWin(state.getBoards().get(0))) {
